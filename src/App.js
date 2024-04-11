@@ -1,8 +1,18 @@
 import React, { Component } from 'react'
+import toast, { Toaster } from 'react-hot-toast';
 import { getAuth, RecaptchaVerifier,signInWithPhoneNumber  } from "firebase/auth";
  import Firebase from './Firebase'
+import { useNavigate } from 'react-router-dom';
+import Otp from './Otp';
 
-export class App extends Component {
+ const notify = () => toast('Otp Sent Successfully...');
+ export class App extends Component {
+   
+  // navigator = ()=>{
+  //   const navigate = useNavigate();
+  //   navigate(<Otp/>)
+  // }
+
    handleChange = (e)=>{
     const {name,value} = e.target
     this.setState({
@@ -33,7 +43,7 @@ export class App extends Component {
           // SMS sent. Prompt user to type the code from the message, then sign the
           // user in with confirmationResult.confirm(code).
           window.confirmationResult = confirmationResult;
-          console.log("OTP sent succeffully")
+          console.log('Otp sent Check it..')
           // ...
         }).catch((error) => {
           // Error; SMS not sent
@@ -49,7 +59,7 @@ window.confirmationResult.confirm(code).then((result) => {
   // User signed in successfully.
   const user = result.user;
   console.log(JSON.stringify(user))
-  alert('User Varified')
+  alert('User Verified')
   // ...
 }).catch((error) => {
   // User couldn't sign in (bad verification code?)
@@ -65,7 +75,26 @@ window.confirmationResult.confirm(code).then((result) => {
          <form action="" onSubmit={this.onSignInSubmit }>
          <div id='sign-in-button'></div>
           <input type="number" name="mobile" id="" placeholder='Enter Mobile' onChange={this.handleChange}/>
-          <button type='submit'>Submit</button>
+          <button type='submit' onClick={notify} >Submit</button>
+          <Toaster 
+           toastOptions={{
+            // Define default options
+            className: '',
+            duration: 5000,
+            style: {
+              background: 'green',
+              color: '#fff',
+            },
+        
+            // Default options for specific types
+            success: {
+              duration: 3000,
+              theme: {
+                primary: 'green',
+                secondary: 'green',
+              },
+            },
+          }}/>
          </form>
 
          <h2>OTP Here...</h2>
@@ -73,6 +102,7 @@ window.confirmationResult.confirm(code).then((result) => {
           <input type="number" name="otp" id="" placeholder='Enter OTP' onChange={this.handleChange}/>
           <button type='submit'>Submit</button>
          </form>
+         {/* <Otp/> */}
     </div>
       </div>
     )
