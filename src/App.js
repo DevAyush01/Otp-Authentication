@@ -97,12 +97,12 @@ window.confirmationResult.confirm(code).then((result) => {
           }}/>
          </form>
 
-         <h2>OTP Here...</h2>
+         {/* <h2>OTP Here...</h2>
          <form action="" onSubmit={this.onsubmitOtp}>
           <input type="number" name="otp" id="" placeholder='Enter OTP' onChange={this.handleChange}/>
           <button type='submit'>Submit</button>
-         </form>
-         {/* <Otp/> */}
+         </form> */}
+         <Otp/>
     </div>
       </div>
     )
